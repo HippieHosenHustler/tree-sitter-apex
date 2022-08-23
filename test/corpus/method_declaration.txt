@@ -1,0 +1,25 @@
+==================
+Simple Method Declaration
+==================
+
+public class Benioff {
+  public static Integer getInteger() {} 
+}
+
+---
+
+(source_file
+  (class_declaration
+    (modifiers)
+    (identifier)
+    (class_body
+      (method_declaration
+        (modifiers)
+        (primitive_type)
+        (identifier)
+        (method_parameters)
+        (method_body)
+      )
+    )
+  )
+)
