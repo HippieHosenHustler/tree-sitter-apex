@@ -1,17 +1,21 @@
 ==============
 Class definition
 ==============
-
+/*
+ * Multiline Comment
+ */
 public static class Benioff {
+  // single line comment
 }
 ---
 
 (source_file
+  (block_comment)
   (class_declaration
     (modifiers)
     (identifier)
     (class_body
-    
+      (line_comment)
     )
   )
 )
