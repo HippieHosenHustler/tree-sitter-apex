@@ -1,101 +1,272 @@
 {
   "name": "Apex",
   "rules": {
-    "id": {
-      "type": "PATTERN",
-      "value": "[a-z]+"
+    "source_file": {
+      "type": "REPEAT",
+      "content": {
+        "type": "SYMBOL",
+        "name": "_definition"
+      }
     },
-    "nat": {
-      "type": "PATTERN",
-      "value": "[0-9]+"
-    },
-    "program": {
-      "type": "SYMBOL",
-      "name": "aexp"
-    },
-    "aexp": {
+    "_definition": {
       "type": "CHOICE",
       "members": [
         {
-          "type": "PATTERN",
-          "value": "[0-9]+"
-        },
+          "type": "SYMBOL",
+          "name": "class_declaration"
+        }
+      ]
+    },
+    "class_declaration": {
+      "type": "SEQ",
+      "members": [
         {
-          "type": "PATTERN",
-          "value": "[a-z]+"
-        },
-        {
-          "type": "SEQ",
+          "type": "CHOICE",
           "members": [
             {
               "type": "SYMBOL",
-              "name": "aexp"
+              "name": "modifiers"
             },
             {
-              "type": "STRING",
-              "value": "+"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "aexp"
+              "type": "BLANK"
             }
           ]
         },
         {
-          "type": "SEQ",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "aexp"
-            },
-            {
-              "type": "STRING",
-              "value": "-"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "aexp"
-            }
-          ]
+          "type": "STRING",
+          "value": "class"
         },
         {
-          "type": "SEQ",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "aexp"
-            },
-            {
-              "type": "STRING",
-              "value": "*"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "aexp"
-            }
-          ]
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "SYMBOL",
+            "name": "identifier"
+          }
         },
         {
-          "type": "SEQ",
+          "type": "FIELD",
+          "name": "body",
+          "content": {
+            "type": "SYMBOL",
+            "name": "class_body"
+          }
+        }
+      ]
+    },
+    "modifiers": {
+      "type": "REPEAT1",
+      "content": {
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "_annotation"
+          },
+          {
+            "type": "STRING",
+            "value": "private"
+          },
+          {
+            "type": "STRING",
+            "value": "protected"
+          },
+          {
+            "type": "STRING",
+            "value": "public"
+          },
+          {
+            "type": "STRING",
+            "value": "global"
+          },
+          {
+            "type": "STRING",
+            "value": "final"
+          },
+          {
+            "type": "STRING",
+            "value": "static"
+          },
+          {
+            "type": "STRING",
+            "value": "virtual"
+          },
+          {
+            "type": "STRING",
+            "value": "abstract"
+          },
+          {
+            "type": "STRING",
+            "value": "with sharing"
+          },
+          {
+            "type": "STRING",
+            "value": "without sharing"
+          }
+        ]
+      }
+    },
+    "identifier": {
+      "type": "PATTERN",
+      "value": "[\\p{L}_$][\\p{L}\\p{Nd}_$]*"
+    },
+    "class_body": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "{"
+        },
+        {
+          "type": "STRING",
+          "value": "}"
+        }
+      ]
+    },
+    "_annotation": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "@"
+        },
+        {
+          "type": "CHOICE",
           "members": [
             {
               "type": "STRING",
-              "value": "("
-            },
-            {
-              "type": "SYMBOL",
-              "name": "aexp"
+              "value": "AuraEnabled"
             },
             {
               "type": "STRING",
-              "value": ")"
+              "value": "Deprecated"
+            },
+            {
+              "type": "STRING",
+              "value": "Future"
+            },
+            {
+              "type": "STRING",
+              "value": "InvocableMethod"
+            },
+            {
+              "type": "STRING",
+              "value": "InvocableVariable"
+            },
+            {
+              "type": "STRING",
+              "value": "IsTest"
+            },
+            {
+              "type": "STRING",
+              "value": "JsonAccess"
+            },
+            {
+              "type": "STRING",
+              "value": "NamespaceAccessible"
+            },
+            {
+              "type": "STRING",
+              "value": "ReadOnly"
+            },
+            {
+              "type": "STRING",
+              "value": "RemoteAction"
+            },
+            {
+              "type": "STRING",
+              "value": "SuppressWarnings"
+            },
+            {
+              "type": "STRING",
+              "value": "TestSetup"
+            },
+            {
+              "type": "STRING",
+              "value": "TestVisible"
+            },
+            {
+              "type": "STRING",
+              "value": "RestResource"
+            },
+            {
+              "type": "STRING",
+              "value": "HttpDelete"
+            },
+            {
+              "type": "STRING",
+              "value": "HttpGet"
+            },
+            {
+              "type": "STRING",
+              "value": "HttpPatch"
+            },
+            {
+              "type": "STRING",
+              "value": "HttpPost"
+            },
+            {
+              "type": "STRING",
+              "value": "HttpPut"
             }
           ]
         }
       ]
+    },
+    "line_comment": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 0,
+        "content": {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "//"
+            },
+            {
+              "type": "PATTERN",
+              "value": "[^\\n]*"
+            }
+          ]
+        }
+      }
+    },
+    "block_comment": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": 0,
+        "content": {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "/*"
+            },
+            {
+              "type": "PATTERN",
+              "value": "[^*]*\\*+([^/*][^*]*\\*+)*"
+            },
+            {
+              "type": "STRING",
+              "value": "/"
+            }
+          ]
+        }
+      }
     }
   },
   "extras": [
+    {
+      "type": "SYMBOL",
+      "name": "line_comment"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "block_comment"
+    },
     {
       "type": "PATTERN",
       "value": "\\s"

@@ -1,0 +1,17 @@
+==============
+Class definition
+==============
+
+public static class Benioff {
+}
+---
+
+(source_file
+  (class_declaration
+    (modifiers)
+    (identifier)
+    (class_body
+    
+    )
+  )
+)

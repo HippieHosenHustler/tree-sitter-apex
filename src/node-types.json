@@ -1,6 +1,52 @@
 [
   {
-    "type": "aexp",
+    "type": "class_body",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "class_declaration",
+    "named": true,
+    "fields": {
+      "body": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "class_body",
+            "named": true
+          }
+        ]
+      },
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "modifiers",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "modifiers",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "source_file",
     "named": true,
     "fields": {},
     "children": {
@@ -8,35 +54,154 @@
       "required": false,
       "types": [
         {
-          "type": "aexp",
+          "type": "class_declaration",
           "named": true
         }
       ]
     }
   },
   {
-    "type": "id",
-    "named": true,
-    "fields": {}
-  },
-  {
-    "type": "(",
+    "type": "@",
     "named": false
   },
   {
-    "type": ")",
+    "type": "AuraEnabled",
     "named": false
   },
   {
-    "type": "*",
+    "type": "Deprecated",
     "named": false
   },
   {
-    "type": "+",
+    "type": "Future",
     "named": false
   },
   {
-    "type": "-",
+    "type": "HttpDelete",
+    "named": false
+  },
+  {
+    "type": "HttpGet",
+    "named": false
+  },
+  {
+    "type": "HttpPatch",
+    "named": false
+  },
+  {
+    "type": "HttpPost",
+    "named": false
+  },
+  {
+    "type": "HttpPut",
+    "named": false
+  },
+  {
+    "type": "InvocableMethod",
+    "named": false
+  },
+  {
+    "type": "InvocableVariable",
+    "named": false
+  },
+  {
+    "type": "IsTest",
+    "named": false
+  },
+  {
+    "type": "JsonAccess",
+    "named": false
+  },
+  {
+    "type": "NamespaceAccessible",
+    "named": false
+  },
+  {
+    "type": "ReadOnly",
+    "named": false
+  },
+  {
+    "type": "RemoteAction",
+    "named": false
+  },
+  {
+    "type": "RestResource",
+    "named": false
+  },
+  {
+    "type": "SuppressWarnings",
+    "named": false
+  },
+  {
+    "type": "TestSetup",
+    "named": false
+  },
+  {
+    "type": "TestVisible",
+    "named": false
+  },
+  {
+    "type": "abstract",
+    "named": false
+  },
+  {
+    "type": "block_comment",
+    "named": true
+  },
+  {
+    "type": "class",
+    "named": false
+  },
+  {
+    "type": "final",
+    "named": false
+  },
+  {
+    "type": "global",
+    "named": false
+  },
+  {
+    "type": "identifier",
+    "named": true
+  },
+  {
+    "type": "line_comment",
+    "named": true
+  },
+  {
+    "type": "private",
+    "named": false
+  },
+  {
+    "type": "protected",
+    "named": false
+  },
+  {
+    "type": "public",
+    "named": false
+  },
+  {
+    "type": "static",
+    "named": false
+  },
+  {
+    "type": "virtual",
+    "named": false
+  },
+  {
+    "type": "with sharing",
+    "named": false
+  },
+  {
+    "type": "without sharing",
+    "named": false
+  },
+  {
+    "type": "{",
+    "named": false
+  },
+  {
+    "type": "}",
     "named": false
   }
 ]
