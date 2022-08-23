@@ -5,17 +5,8 @@
       "type": "REPEAT",
       "content": {
         "type": "SYMBOL",
-        "name": "_definition"
+        "name": "class_declaration"
       }
-    },
-    "_definition": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "class_declaration"
-        }
-      ]
     },
     "class_declaration": {
       "type": "SEQ",
@@ -51,6 +42,97 @@
             "type": "SYMBOL",
             "name": "class_body"
           }
+        }
+      ]
+    },
+    "method_declaration": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "modifiers"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_type"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "identifier"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "method_body"
+        }
+      ]
+    },
+    "_type": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "primitive_type"
+        }
+      ]
+    },
+    "primitive_type": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "Blob"
+        },
+        {
+          "type": "STRING",
+          "value": "Boolean"
+        },
+        {
+          "type": "STRING",
+          "value": "Date"
+        },
+        {
+          "type": "STRING",
+          "value": "Datetime"
+        },
+        {
+          "type": "STRING",
+          "value": "Decimal"
+        },
+        {
+          "type": "STRING",
+          "value": "Double"
+        },
+        {
+          "type": "STRING",
+          "value": "Id"
+        },
+        {
+          "type": "STRING",
+          "value": "Integer"
+        },
+        {
+          "type": "STRING",
+          "value": "Long"
+        },
+        {
+          "type": "STRING",
+          "value": "Object"
+        },
+        {
+          "type": "STRING",
+          "value": "String"
+        },
+        {
+          "type": "STRING",
+          "value": "Time"
         }
       ]
     },
@@ -102,6 +184,10 @@
           {
             "type": "STRING",
             "value": "without sharing"
+          },
+          {
+            "type": "STRING",
+            "value": "override"
           }
         ]
       }
@@ -111,6 +197,36 @@
       "value": "[\\p{L}_$][\\p{L}\\p{Nd}_$]*"
     },
     "class_body": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "{"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "method_declaration"
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "STRING",
+          "value": "}"
+        }
+      ]
+    },
+    "method_body": {
       "type": "SEQ",
       "members": [
         {

@@ -13,13 +13,7 @@ module.exports = grammar({
   extras: ($) => [$.line_comment, $.block_comment, /\s/],
 
   rules: {
-    source_file: ($) => repeat($._definition),
-
-    _definition: ($) =>
-      choice(
-        $.class_declaration
-        // TODO: other definitions
-      ),
+    source_file: ($) => repeat($.class_declaration),
 
     class_declaration: ($) =>
       seq(
@@ -29,7 +23,34 @@ module.exports = grammar({
         field("body", $.class_body)
       ),
 
+    method_declaration: ($) =>
+      seq(optional($.modifiers), $._type, $.identifier, $.method_body),
+
+    _type: ($) =>
+      choice(
+        $.primitive_type
+        // $.array_type,
+        // $.object_type,
+      ),
+
+    primitive_type: ($) =>
+      choice(
+        "Blob",
+        "Boolean",
+        "Date",
+        "Datetime",
+        "Decimal",
+        "Double",
+        "Id",
+        "Integer",
+        "Long",
+        "Object",
+        "String",
+        "Time"
+      ),
+
     modifiers: ($) =>
+      // TODO: Split into different types of modifiers? (Class, method, variable etc.)
       repeat1(
         choice(
           $._annotation,
@@ -42,7 +63,8 @@ module.exports = grammar({
           "virtual",
           "abstract",
           "with sharing",
-          "without sharing"
+          "without sharing",
+          "override"
         )
       ),
 
@@ -52,6 +74,14 @@ module.exports = grammar({
       seq(
         "{",
         // TODO: contents of a class body
+        optional(seq($.method_declaration)),
+        "}"
+      ),
+
+    method_body: ($) =>
+      seq(
+        "{",
+        // TODO: contents of a method body
         "}"
       ),
 
