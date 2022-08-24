@@ -3,15 +3,26 @@
   "version": "0.0.1",
   "description": "A tree-sitter for the apex programming language",
   "main": "bindings/node",
+  "keywords": [
+    "parser",
+    "apex",
+    "tree-sitter"
+  ],
+  "author": "Edwin Scharfe",
+  "license": "MIT",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tree-sitter generate && node-gyp rebuild",
+    "test": "tree-sitter test",
+    "build-test": "tree-sitter generate && node-gyp build && tree-sitter test"
   },
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "nan": "^2.16.0"
   },
   "devDependencies": {
     "tree-sitter-cli": "^0.20.6"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ree-sitter/ree-sitter-apex.git"
   }
 }
