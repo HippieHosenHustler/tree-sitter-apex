@@ -125,5 +125,12 @@ module.exports = grammar({
 
     block_comment: ($) =>
       token(prec(PREC.COMMENT, seq("/*", /[^*]*\*+([^/*][^*]*\*+)*/, "/"))),
+
+    local_variable_declaration: ($) =>
+      seq(
+        field("type", $._unannotated_style),
+        $._variable_declarator_list,
+        ";"
+      ),
   },
 });
