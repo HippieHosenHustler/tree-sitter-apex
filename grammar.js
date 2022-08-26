@@ -24,7 +24,17 @@ module.exports = grammar({
       ),
 
     method_declaration: ($) =>
-      seq(optional($.modifiers), $._type, $.identifier, $.method_body),
+      seq(
+        optional($.modifiers),
+        $._type,
+        $.identifier,
+        $.method_parameters,
+        $.method_body
+      ),
+
+    method_parameters: ($) => seq("(", optional($.method_parameter), ")"),
+
+    method_parameter: ($) => seq($._type, $.identifier),
 
     _type: ($) =>
       choice(
