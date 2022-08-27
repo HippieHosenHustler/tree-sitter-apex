@@ -38,9 +38,9 @@ module.exports = grammar({
 
     _type: ($) =>
       choice(
-        $.primitive_type
-        // $.array_type,
-        // $.object_type,
+        $.primitive_type,
+        $.array_type
+        // TODO: $.object_type,
       ),
 
     primitive_type: ($) =>
@@ -57,6 +57,12 @@ module.exports = grammar({
         "Object",
         "String",
         "Time"
+      ),
+
+    array_type: ($) =>
+      seq(
+        field("element", $._unannotated_type),
+        field("dimensions", $.dimensions)
       ),
 
     modifiers: ($) =>
@@ -125,5 +131,45 @@ module.exports = grammar({
 
     block_comment: ($) =>
       token(prec(PREC.COMMENT, seq("/*", /[^*]*\*+([^/*][^*]*\*+)*/, "/"))),
+
+    local_variable_declaration: ($) =>
+      seq(field("type", $._unannotated_type), $._variable_declarator_list, ";"),
+
+    _unannotated_type: ($) => choice($.primitive_type, $.array_type),
+
+    _annotated_type: ($) => seq(repeat($._annotation), $._unannotated_type),
+
+    _variable_declarator_list: ($) =>
+      commaSep1(field("declarator", $.variable_declarator)),
+
+    variable_declarator: ($) =>
+      seq(
+        $._variable_declarator_id,
+        optional(seq("=", field("value", $._variable_initializer)))
+      ),
+
+    _variable_declarator_id: ($) =>
+      seq(
+        field("name", $.identifier),
+        field("dimensions", optional($.dimensions))
+      ),
+
+    dimensions: ($) =>
+      prec.right(repeat1(seq(repeat($._annotation), "[", "]"))),
+
+    _variable_initializer: ($) => choice($.expression, $.array_initializer),
+
+    expression: ($) => "", //TODO: Expressions
+
+    array_initializer: ($) =>
+      seq("{", commaSep($._variable_initializer), optional(","), "}"),
   },
 });
+
+function commaSep1(rule) {
+  return seq(rule, repeat(seq(",", rule)));
+}
+
+function commaSep(rule) {
+  return optional(commaSep1(rule));
+}

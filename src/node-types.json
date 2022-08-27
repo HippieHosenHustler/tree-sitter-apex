@@ -1,5 +1,54 @@
 [
   {
+    "type": "array_initializer",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "array_initializer",
+          "named": true
+        },
+        {
+          "type": "expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "array_type",
+    "named": true,
+    "fields": {
+      "dimensions": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "dimensions",
+            "named": true
+          }
+        ]
+      },
+      "element": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "array_type",
+            "named": true
+          },
+          {
+            "type": "primitive_type",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "class_body",
     "named": true,
     "fields": {},
@@ -51,6 +100,11 @@
     }
   },
   {
+    "type": "dimensions",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "method_body",
     "named": true,
     "fields": {}
@@ -63,6 +117,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "array_type",
+          "named": true
+        },
         {
           "type": "identifier",
           "named": true
@@ -94,6 +152,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "array_type",
+          "named": true
+        },
         {
           "type": "identifier",
           "named": true
@@ -146,11 +208,63 @@
     }
   },
   {
+    "type": "variable_declarator",
+    "named": true,
+    "fields": {
+      "dimensions": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "dimensions",
+            "named": true
+          }
+        ]
+      },
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "identifier",
+            "named": true
+          }
+        ]
+      },
+      "value": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "array_initializer",
+            "named": true
+          },
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "(",
     "named": false
   },
   {
     "type": ")",
+    "named": false
+  },
+  {
+    "type": ",",
+    "named": false
+  },
+  {
+    "type": ";",
+    "named": false
+  },
+  {
+    "type": "=",
     "named": false
   },
   {
@@ -282,6 +396,14 @@
     "named": false
   },
   {
+    "type": "[",
+    "named": false
+  },
+  {
+    "type": "]",
+    "named": false
+  },
+  {
     "type": "abstract",
     "named": false
   },
@@ -292,6 +414,10 @@
   {
     "type": "class",
     "named": false
+  },
+  {
+    "type": "expression",
+    "named": true
   },
   {
     "type": "final",
