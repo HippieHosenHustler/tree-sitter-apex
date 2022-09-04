@@ -24,5 +24,13 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ree-sitter/ree-sitter-apex.git"
-  }
+  },
+  "tree-sitter": [
+    {
+      "scope": "source.cls",
+      "file-types": [
+        "cls"
+      ]
+    }
+  ]
 }
